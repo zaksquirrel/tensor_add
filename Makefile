@@ -5,7 +5,7 @@ INC = $(DIR)/include/
 SRC = $(DIR)/src/
 
 CC = gcc
-CFLAGS = -Wall -std=c99 
+CFLAGS = -Wall -std=c99 -g
 LDFLAGS =
 INCLUDES = -I$(INC)
 

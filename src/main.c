@@ -3,7 +3,7 @@
 int 
 main (int argc, char ** argv)
 {
-    int dimensions[3] = { 10, 10, 2 };
+    int dimensions[3] = { 2, 2, 2 };
 	
 	struct mem_abs * ma0;
 	struct tensor * t0;
