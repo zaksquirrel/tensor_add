@@ -166,10 +166,11 @@ tensor_add_recurs_row_first(int idx, struct tensor * A, int * dim_A, struct tens
 			
 		offset = 0;
 		get_point_addr_recurs(B, 0, coords, &offset, &pB_addr);	
-		printf("\n offset after first usage %d\n",offset);
+
+		offset = 0;
 		get_point_addr_recurs(A, 0, coords, &offset, &pA_addr);
 		printf(") mem offset = %d\taddr = %p ", offset, pA_addr);
-		// printf("\n value of pAaddr before |%d|\n", *pA_addr);
+		printf("\n value of pAaddr before |%d|\n", *pA_addr);
 		*pA_addr += *pB_addr;
 		printf("\n value of pAaddr after = %d\n", *pA_addr);
 
