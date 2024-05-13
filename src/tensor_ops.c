@@ -68,7 +68,7 @@ get_point_addr_recurs(struct tensor * t, int idx, int * coords, int * offset, in
 	// printf("idx = %d coord = %d offset = %d\n", idx, coords[idx], *offset);
 	int nbdimss = t->nb_dims;
 
-	if (idx >= hi)
+	if (idx >= nbdimss )
 	{
 		// printf("point mem offset = %d\n", *offset);
 		*addr += *offset;
