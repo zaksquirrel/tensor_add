@@ -66,8 +66,9 @@ void
 get_point_addr_recurs(struct tensor * t, int idx, int * coords, int * offset, int ** addr)
 {
 	// printf("idx = %d coord = %d offset = %d\n", idx, coords[idx], *offset);
-	
-	if (idx >= t->nb_dims)
+	int nbdimss = t->nb_dims;
+
+	if (idx >= hi)
 	{
 		// printf("point mem offset = %d\n", *offset);
 		*addr += *offset;
@@ -78,12 +79,10 @@ get_point_addr_recurs(struct tensor * t, int idx, int * coords, int * offset, in
 	{	
 		int i, temp;
 		temp = coords[idx];
-		// printf("temp = %d\n", temp);
 
-		for (i = (idx+1) ; i < t->nb_dims ; ++i)
+		for (i = (idx+1) ; i < nbdimss ; ++i)
 		{
 			temp *= t->dims[i].length;
-			// printf("ite %d temp = %d\n", i, temp);
 		}
 		(*offset) += temp;
 		get_point_addr_recurs(t, (idx+1), coords, offset, addr);
@@ -94,34 +93,25 @@ void
 tensor_run_recurs_row_first(struct tensor * t, int idx, int * dim_size, int * coords)
 {
 	int i;
+	int nbdims = t->nb_dims;
+	int dimsize = dim_size[idx];
 	
-	if (idx >= t->nb_dims)
+	if (idx >= nbdims)
 	{
 		int * pt_addr; 
 		int offset;
 		pt_addr = t->base_addr;
-
-		//printf("t->nb_dims = %ld\n", t->nb_dims);
-		// printf("point ( ");
-		// for (i = 0 ; i < t->nb_dims ; ++i) 
-		// {
-		// 	printf("%d ", coords[i]);
-		// }
 			
 		offset = 0;
 		get_point_addr_recurs(t, 0, coords, &offset, &pt_addr);
-		// printf(") mem offset = %d\taddr = %p ", offset, pt_addr);	
 		
-		//init w/ val
 		*pt_addr = offset;
-
-		// printf("value = %d\n", *pt_addr);
 
 		return;
 	}
 	else
 	{	
-		for (i = 0 ; i < dim_size[idx] ; ++i)
+		for (i = 0 ; i < dimsize ; ++i)
 		{
 			coords[idx] = i;
 			tensor_run_recurs_row_first(t, (idx+1), dim_size, coords);
@@ -132,13 +122,10 @@ tensor_run_recurs_row_first(struct tensor * t, int idx, int * dim_size, int * co
 int 
 tensor_init(struct tensor * t, int * dimensions)
 {
-	// printf("Starting initialization\n");
 
 	int coords[t->nb_dims];
 	
-	// printf("Starting recursivity\n");
 	tensor_run_recurs_row_first(t, 0, dimensions, coords);
-	// printf("Recursivity over\n");
 
 	return 0;
 }
@@ -156,21 +143,13 @@ tensor_add_recurs_row_first(int idx, struct tensor * A, int * dim_A, struct tens
 		pB_addr = B->base_addr;
 		int offset;
 
-		// printf("point ( ");
-		// for (i = 0 ; i < A->nb_dims ; ++i) 
-		// {
-		// 	printf("%d ", coords[i]);
-		// }
-			
 		offset = 0;
 		get_point_addr_recurs(B, 0, coords, &offset, &pB_addr);	
 
 		offset = 0;
 		get_point_addr_recurs(A, 0, coords, &offset, &pA_addr);
-		// printf(") mem offset = %d\taddr = %p ", offset, pA_addr);
-		// printf("\n value of pAaddr before |%d|\n", *pA_addr);
+		
 		*pA_addr += *pB_addr;
-		// printf("\n value of pAaddr after = %d\n", *pA_addr);
 
 		return;
 	}
@@ -183,16 +162,14 @@ tensor_add_recurs_row_first(int idx, struct tensor * A, int * dim_A, struct tens
 		}
 	}
 }
+
 int 
 tensor_add(struct tensor * A, int * dim_A, struct tensor * B)
 {
-	// printf("Starting initialization\n");
 
 	int coords[A->nb_dims];
 	
-	// printf("Starting addition\n");
 	tensor_add_recurs_row_first(0, A, dim_A, B, coords);
-	// printf("Addition over\n");
 
 	return 0;
 }

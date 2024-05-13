@@ -6,18 +6,18 @@ main (int argc, char ** argv)
 {
     int dimensions[3] = { 100, 100, 20 };
 	
-	struct mem_abs * ma0;
-	struct tensor * t0;
+	// struct mem_abs * ma0;
+	// struct tensor * t0;
 		
 	// printf("Creationg memory abstraction\n");
-	mem_abs_create(&ma0);
+	// mem_abs_create(&ma0);
 	// printf("Memory abstraction created\n");
 	
 	// printf("Checking initialized memory abstraction\n");
 	// printf("length = %ld base = %p\n", ma0->mem_length, ma0->mem); 
 
 	// printf("Creating tensor\n");
-	tensor_create(&t0, 3, dimensions, ma0);
+	// tensor_create(&t0, 3, dimensions, ma0);
 	// printf("Tensor created\n");
 
 	// printf("Checking extended memory abstraction\n");
@@ -31,7 +31,7 @@ main (int argc, char ** argv)
 	// }
 
 	// printf("Populating tensor\n");
-	tensor_init(t0, dimensions);
+	// tensor_init(t0, dimensions);
 	// printf("Tensor populated\n");
 
 	struct mem_abs * ma1;
@@ -63,12 +63,9 @@ main (int argc, char ** argv)
 	// printf("Tensor populated\n");
 
 	float time1,time2,time;
-
-	printf("Tensor addition\n");
 	time1 = clock();
 	tensor_add(t1, dimensions, t1);
 	time2 = clock();
-	printf("Tensor added\n");
 	time=(float) (time2-time1)/CLOCKS_PER_SEC;
 
 	printf("\ntime spent %f\n", time);
