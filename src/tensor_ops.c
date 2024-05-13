@@ -87,7 +87,10 @@ get_point_addr_recurs(struct tensor * t, int idx, int * coords, int * offset, in
 		(*offset) += temp;
 		get_point_addr_recurs(t, (idx+1), coords, offset, addr);
 	}
+
+	
 }
+
 
 void
 tensor_run_recurs_row_first(struct tensor * t, int idx, int * dim_size, int * coords)
