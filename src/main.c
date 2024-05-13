@@ -9,58 +9,58 @@ main (int argc, char ** argv)
 	struct mem_abs * ma0;
 	struct tensor * t0;
 		
-	printf("Creationg memory abstraction\n");
+	// printf("Creationg memory abstraction\n");
 	mem_abs_create(&ma0);
-	printf("Memory abstraction created\n");
+	// printf("Memory abstraction created\n");
 	
-	printf("Checking initialized memory abstraction\n");
-	printf("length = %ld base = %p\n", ma0->mem_length, ma0->mem); 
+	// printf("Checking initialized memory abstraction\n");
+	// printf("length = %ld base = %p\n", ma0->mem_length, ma0->mem); 
 
-	printf("Creating tensor\n");
+	// printf("Creating tensor\n");
 	tensor_create(&t0, 3, dimensions, ma0);
-	printf("Tensor created\n");
+	// printf("Tensor created\n");
 
-	printf("Checking extended memory abstraction\n");
-	printf("length = %ld base = %p\n", ma0->mem_length, ma0->mem); 
+	// printf("Checking extended memory abstraction\n");
+	// printf("length = %ld base = %p\n", ma0->mem_length, ma0->mem); 
 
-	printf("Testing mem...\n");
-	for (int i = 0 ; i < ma0->mem_length ; ++i)
-	{
-		ma0->mem[i] = i * 10;
-		printf("&mem[%d]=%p\tmem[%d] = %d\n", i, ma0->mem+i, i, ma0->mem[i]);
-	}
+	// printf("Testing mem...\n");
+	// for (int i = 0 ; i < ma0->mem_length ; ++i)
+	// {
+	// 	ma0->mem[i] = i * 10;
+	// 	printf("&mem[%d]=%p\tmem[%d] = %d\n", i, ma0->mem+i, i, ma0->mem[i]);
+	// }
 
-	printf("Populating tensor\n");
+	// printf("Populating tensor\n");
 	tensor_init(t0, dimensions);
-	printf("Tensor populated\n");
+	// printf("Tensor populated\n");
 
 	struct mem_abs * ma1;
 	struct tensor * t1;
 		
-	printf("Creationg memory abstraction\n");
+	// printf("Creationg memory abstraction\n");
 	mem_abs_create(&ma1);
-	printf("Memory abstraction created\n");
+	// printf("Memory abstraction created\n");
 	
-	printf("Checking initialized memory abstraction\n");
-	printf("length = %ld base = %p\n", ma1->mem_length, ma1->mem); 
+	// printf("Checking initialized memory abstraction\n");
+	// printf("length = %ld base = %p\n", ma1->mem_length, ma1->mem); 
 
-	printf("Creating tensor\n");
+	// printf("Creating tensor\n");
 	tensor_create(&t1, 3, dimensions, ma1);
-	printf("Tensor created\n");
+	// printf("Tensor created\n");
 
-	printf("Checking extended memory abstraction\n");
-	printf("length = %ld base = %p\n", ma1->mem_length, ma1->mem); 
+	// printf("Checking extended memory abstraction\n");
+	// printf("length = %ld base = %p\n", ma1->mem_length, ma1->mem); 
 
-	printf("Testing mem...\n");
-	for (int i = 0 ; i < ma1->mem_length ; ++i)
-	{
-		ma1->mem[i] = i * 10;
-		printf("&mem[%d]=%p\tmem[%d] = %d\n", i, ma1->mem+i, i, ma1->mem[i]);
-	}
+	// printf("Testing mem...\n");
+	// for (int i = 0 ; i < ma1->mem_length ; ++i)
+	// {
+	// 	ma1->mem[i] = i * 10;
+	// 	printf("&mem[%d]=%p\tmem[%d] = %d\n", i, ma1->mem+i, i, ma1->mem[i]);
+	// }
 
-	printf("Populating tensor\n");
+	// printf("Populating tensor\n");
 	tensor_init(t1, dimensions);
-	printf("Tensor populated\n");
+	// printf("Tensor populated\n");
 
 	float time1,time2,time;
 
@@ -74,13 +74,13 @@ main (int argc, char ** argv)
 	printf("\ntime spent %f\n", time);
 	
 
-	printf("Destroying tensor\n");
+	// printf("Destroying tensor\n");
 	tensor_destroy(t1);
-	printf("Tensor destroyed\n");
+	// printf("Tensor destroyed\n");
 	
-	printf("Destroying memory abstraction\n");
+	// printf("Destroying memory abstraction\n");
 	mem_abs_destroy(ma1);
-	printf("Memory abstraction destroyed\n");
+	// printf("Memory abstraction destroyed\n");
 
     /**
      * Ex: How to access a particular point in a tensor

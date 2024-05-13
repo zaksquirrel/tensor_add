@@ -7,7 +7,7 @@ mem_abs_create(struct mem_abs ** ma)
 	*ma = (struct mem_abs *)malloc(sizeof(struct mem_abs));
 	(*ma)->mem = (int *)malloc(sizeof(int));
 	(*ma)->mem_length = 1; 
-	printf("mem ptr during alloc = %p\n", (*ma)->mem);	
+	// printf("mem ptr during alloc = %p\n", (*ma)->mem);	
 
 	return 0;
 }
@@ -26,8 +26,7 @@ mem_abs_grow(struct mem_abs * ma, size_t size)
 {
 	ma->mem = realloc(ma->mem, (ma->mem_length * size * sizeof(int)));
 	ma->mem_length *= size;
-	printf("Memory abstraction extended\n");
-
+	// printf("Memory abstraction extended\n");
 	return 0;
 }
 
@@ -49,8 +48,7 @@ tensor_create(struct tensor ** t, size_t size, int * dimslength, struct mem_abs 
 	}
 
 	(*t)->base_addr = ma->mem; // &mem[0];
-	printf("Created %ld dimensions tensor with base address = %p\n",
-			(*t)->nb_dims, (*t)->base_addr);
+	// printf("Created %ld dimensions tensor with base address = %p\n", (*t)->nb_dims, (*t)->base_addr);
 
 	return 0;
 }
@@ -104,20 +102,20 @@ tensor_run_recurs_row_first(struct tensor * t, int idx, int * dim_size, int * co
 		pt_addr = t->base_addr;
 
 		//printf("t->nb_dims = %ld\n", t->nb_dims);
-		printf("point ( ");
-		for (i = 0 ; i < t->nb_dims ; ++i) 
-		{
-			printf("%d ", coords[i]);
-		}
+		// printf("point ( ");
+		// for (i = 0 ; i < t->nb_dims ; ++i) 
+		// {
+		// 	printf("%d ", coords[i]);
+		// }
 			
 		offset = 0;
 		get_point_addr_recurs(t, 0, coords, &offset, &pt_addr);
-		printf(") mem offset = %d\taddr = %p ", offset, pt_addr);	
+		// printf(") mem offset = %d\taddr = %p ", offset, pt_addr);	
 		
 		//init w/ val
 		*pt_addr = offset;
 
-		printf("value = %d\n", *pt_addr);
+		// printf("value = %d\n", *pt_addr);
 
 		return;
 	}
@@ -134,13 +132,13 @@ tensor_run_recurs_row_first(struct tensor * t, int idx, int * dim_size, int * co
 int 
 tensor_init(struct tensor * t, int * dimensions)
 {
-	printf("Starting initialization\n");
+	// printf("Starting initialization\n");
 
 	int coords[t->nb_dims];
 	
-	printf("Starting recursivity\n");
+	// printf("Starting recursivity\n");
 	tensor_run_recurs_row_first(t, 0, dimensions, coords);
-	printf("Recursivity over\n");
+	// printf("Recursivity over\n");
 
 	return 0;
 }
@@ -158,21 +156,21 @@ tensor_add_recurs_row_first(int idx, struct tensor * A, int * dim_A, struct tens
 		pB_addr = B->base_addr;
 		int offset;
 
-		printf("point ( ");
-		for (i = 0 ; i < A->nb_dims ; ++i) 
-		{
-			printf("%d ", coords[i]);
-		}
+		// printf("point ( ");
+		// for (i = 0 ; i < A->nb_dims ; ++i) 
+		// {
+		// 	printf("%d ", coords[i]);
+		// }
 			
 		offset = 0;
 		get_point_addr_recurs(B, 0, coords, &offset, &pB_addr);	
 
 		offset = 0;
 		get_point_addr_recurs(A, 0, coords, &offset, &pA_addr);
-		printf(") mem offset = %d\taddr = %p ", offset, pA_addr);
+		// printf(") mem offset = %d\taddr = %p ", offset, pA_addr);
 		// printf("\n value of pAaddr before |%d|\n", *pA_addr);
 		*pA_addr += *pB_addr;
-		printf("\n value of pAaddr after = %d\n", *pA_addr);
+		// printf("\n value of pAaddr after = %d\n", *pA_addr);
 
 		return;
 	}
@@ -188,13 +186,13 @@ tensor_add_recurs_row_first(int idx, struct tensor * A, int * dim_A, struct tens
 int 
 tensor_add(struct tensor * A, int * dim_A, struct tensor * B)
 {
-	printf("Starting initialization\n");
+	// printf("Starting initialization\n");
 
 	int coords[A->nb_dims];
 	
-	printf("Starting addition\n");
+	// printf("Starting addition\n");
 	tensor_add_recurs_row_first(0, A, dim_A, B, coords);
-	printf("Addition over\n");
+	// printf("Addition over\n");
 
 	return 0;
 }
