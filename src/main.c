@@ -1,9 +1,10 @@
 #include "tensor_ops.h"
+#include <time.h>
 
 int 
 main (int argc, char ** argv)
 {
-    int dimensions[3] = { 2, 2, 2 };
+    int dimensions[3] = { 100, 100, 20 };
 	
 	struct mem_abs * ma0;
 	struct tensor * t0;
@@ -61,9 +62,17 @@ main (int argc, char ** argv)
 	tensor_init(t1, dimensions);
 	printf("Tensor populated\n");
 
+	float time1,time2,time;
+
 	printf("Tensor addition\n");
+	time1 = clock();
 	tensor_add(t1, dimensions, t1);
+	time2 = clock();
 	printf("Tensor added\n");
+	time=(float) (time2-time1)/CLOCKS_PER_SEC;
+
+	printf("\ntime spent %f\n", time);
+	
 
 	printf("Destroying tensor\n");
 	tensor_destroy(t1);
